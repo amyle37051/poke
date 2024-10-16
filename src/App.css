@@ -1,0 +1,45 @@
+/* Ensure root element and body take up the entire viewport height */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+#root {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  height: 100vh;           /* Full viewport height */
+  text-align: center;      /* Ensures text in the form is centered */
+}
+
+form {
+  display: flex;
+  flex-direction: column;  /* Stack inputs vertically */
+  align-items: center;     /* Center the form elements */
+  gap: 10px;               /* Space between input fields */
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+form button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #646cffaa;
+  color: whitesmoke;
+}
+
+
+
+img {
+  margin-top: 20px;
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+}
