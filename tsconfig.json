@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "CommonJS", 
+    "module": "esnext",                         // Changed to "esnext" for ES module compatibility
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "jsx": "react"
+    "moduleResolution": "node",                 // Ensure Node module resolution
+    "jsx": "react-jsx",                         // JSX setting for React
+    "resolveJsonModule": true,                  // Enable JSON module resolution
+    "allowSyntheticDefaultImports": true        // Allow default imports for non-ES module packages
   },
-  "include": ["src/**/*", "src/shadcn-ui.d.ts"] // Include your custom types
+  "include": ["src/**/*", "src/shadcn-ui.d.ts"]
 }
