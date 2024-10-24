@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react'; 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import Skeleton from './components/ui/Skeleton'; // Import the locally created Skeleton component
 import './App.css';
 
 function App() {
@@ -8,12 +9,12 @@ function App() {
   const [pokemon, setPokemon] = useState<string | null>(null); // Use TypeScript types for state
   const [image, setImage] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false); // Declare loading state
 
   //define event type for handleSubmit
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    //const birthDate = event.currentTarget.birthdate.value; //use currentTarget for form
-
+    
     if (!selectedDate) {
       setError('Please select a valid birthdate');
       return;
@@ -27,14 +28,20 @@ function App() {
     //get last digits of ddmmyy and concatenate
     const pokemonNumber = parseInt(dd.slice(-1) + mm.slice(-1) + yy.slice(-1));
 
+    setLoading(true);
+
     fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNumber}`)
       .then((response) => response.json())
       .then((data) => {
         setPokemon(data.name);
         setImage(data.sprites.front_default);
-        setError(''); //clear previous errors
+        setError(''); // Clear previous errors
+        setLoading(false); // Stop loading
       })
-      .catch(() => setError('Could not fetch Pokémon. Please try again.'));
+      .catch(() => {
+        setError('Could not fetch Pokémon. Please try again.');
+        setLoading(false); // Stop loading in case of error
+      });
   };
 
   return (
@@ -53,11 +60,15 @@ function App() {
         <button type="submit">Find my Pokemon</button>
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      {pokemon && (
-        <div>
-          <h2>You are: {pokemon}</h2>
-          {image && <img src={image} alt={pokemon} />}
-        </div>
+      {loading ? ( // Show Skeleton when loading
+        <Skeleton className="w-[300px] h-[300px]" />
+      ) : (
+        pokemon && (
+          <div>
+            <h2>You are: {pokemon}</h2>
+            {image && <img src={image} alt={pokemon} />}
+          </div>
+        )
       )}
     </div>
   );
