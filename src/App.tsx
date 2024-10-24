@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import './App.css';
 
 function App() {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [pokemon, setPokemon] = useState<string | null>(null); // Use TypeScript types for state
   const [image, setImage] = useState<string>('');
   const [error, setError] = useState<string>('');
@@ -9,17 +12,19 @@ function App() {
   //define event type for handleSubmit
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const birthDate = event.currentTarget.birthdate.value; //use currentTarget for form
+    //const birthDate = event.currentTarget.birthdate.value; //use currentTarget for form
 
-    if (!birthDate.match(/^\d{2}-\d{2}-\d{2}$/)) {
-      setError('Invalid birthdate');
+    if (!selectedDate) {
+      setError('Please select a valid birthdate');
       return;
-    }
 
-    const [dd, mm, yy] = birthDate.split('-');
+    //extract dd, mm, yy from the selected Date
+    const dd = selectedDate.getDate().toString();
+    const mm = (selectedDate.getMonth() + 1).toString(); //months are 0-indexed
+    const yy = selectedDate.getFullYear().toString().slice(-2); //last 2 digits of year
 
-    //get last digits of dd, mm, yy
-    const pokemonNumber = parseInt(dd[1] + mm[1] + yy[1]);
+    //get last digits of ddmmyy and concatenate
+    const pokemonNumber = parseInt(dd.slice(-1) + mm.slice(-1) + yy.slice(-1));
 
     fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNumber}`)
       .then((response) => response.json())
@@ -36,8 +41,13 @@ function App() {
       <h1>Which Pokemon are you?</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          Enter your birth date (dd-mm-yy):
-          <input type="text" name="birthdate" placeholder="dd-mm-yy" />
+          Select your birth date:
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date: Date) => setSelectedDate(date)} //update state when date is selected
+            dateFormat="dd-MM-yy" //format date as dd-mm-yy
+            placeholderText="Click to select a date"
+          />
         </label>
         <button type="submit">Find my Pokemon</button>
       </form>
