@@ -17,6 +17,7 @@ function App() {
     if (!selectedDate) {
       setError('Please select a valid birthdate');
       return;
+    }
 
     //extract dd, mm, yy from the selected Date
     const dd = selectedDate.getDate().toString();
@@ -44,7 +45,7 @@ function App() {
           Select your birth date:
           <DatePicker
             selected={selectedDate}
-            onChange={(date: Date) => setSelectedDate(date)} //update state when date is selected
+            onChange={(date: Date | null) => setSelectedDate(date)} //update state when date is selected
             dateFormat="dd-MM-yy" //format date as dd-mm-yy
             placeholderText="Click to select a date"
           />
