@@ -28,18 +28,45 @@ h1 {
   margin-bottom: 20px;
 }
 
-form button {
+button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #646cffaa;
-  color: whitesmoke;
+  background-color: #646cffaa; /* Light purple background */
+  color: white;                /* White text */
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;          /* Rounded corners */
 }
 
-
+button:hover {
+  background-color: #4d47d6;   /* Darker shade on hover */
+}
 
 img {
   margin-top: 20px;
   width: 300px;
   height: 300px;
-  object-fit: contain;
+  object-fit: contain;          /* Ensure image is contained */
+}
+
+/* Style for react-datepicker */
+.react-datepicker__input-container input {
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.react-datepicker__input-container input:focus {
+  outline: none;
+  border-color: #646cff;
+}
+
+.react-datepicker-wrapper {
+  width: 100%; /* Ensures DatePicker is responsive */
+}
+
+.react-datepicker {
+  font-size: 14px; /* Adjust font size */
 }
