@@ -61,7 +61,9 @@ function App() {
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {loading ? ( // Show Skeleton when loading
-        <Skeleton className="w-[300px] h-[300px]" />
+        <div className="skeleton-container">
+          <Skeleton className="skeleton" />
+        </div>
       ) : (
         pokemon && (
           <div>
