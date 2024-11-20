@@ -9,6 +9,7 @@ function RenderPoke() {
     const [image, setImage] = useState<string>("");
     const [error, setError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
+    const [pokemonNumber, setPokemonNumber] = useState<number | null>(null);
   
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
