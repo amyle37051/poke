@@ -10,7 +10,7 @@ function RenderPoke() {
     const [error, setError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
     const [pokemonNumber, setPokemonNumber] = useState<number | null>(null);
-    
+
     const { data, isLoading, error } = useQuery(
       ['pokemon', pokemonNumber], // Unique cache key
       () =>
@@ -21,34 +21,19 @@ function RenderPoke() {
   
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-  
+
       if (!selectedDate) {
-        setError("Please select a valid birthdate");
+        setError('Please select a valid birthdate');
         return;
       }
-  
-      // Extract dd, mm, yy from the selected Date
+
       const dd = selectedDate.getDate().toString();
       const mm = (selectedDate.getMonth() + 1).toString();
-      const yy = selectedDate.getFullYear().toString().slice(-1);
-  
-      // Concatenate the last digits of dd, mm, yy
-      const pokemonNumber = parseInt(dd.slice(-1) + mm.slice(-1) + yy);
-  
-      setLoading(true);
-  
-      fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNumber}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setPokemon(data.name);
-          setImage(data.sprites.front_default);
-          setError(""); // Clear previous errors
-          setLoading(false); // Stop loading
-        })
-        .catch(() => {
-          setError("Could not fetch Pokemon. Please try again.");
-          setLoading(false); // Stop loading in case of error
-        });
+      const yy = selectedDate.getFullYear().toString().slice(-2);
+
+      const calculatedNumber = parseInt(dd.slice(-1) + mm.slice(-1) + yy.slice(-1));
+      setPokemonNumber(calculatedNumber); // Trigger data fetch
+      setError('');
     };
   
     return (
