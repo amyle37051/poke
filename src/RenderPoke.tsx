@@ -2,22 +2,25 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Skeleton from "./components/ui/Skeleton";
+import { useQuery } from "@tanstack/react-query";
 
 function RenderPoke() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [pokemon, setPokemon] = useState<string | null>(null);
   const [image, setImage] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [errorMessage, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [pokemonNumber, setPokemonNumber] = useState<number | null>(null);
 
+
   const { data, isLoading, error } = useQuery(
-    ["pokemon", pokemonNumber], // Unique cache key
-    () =>
-      fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNumber}`).then((res) =>
-        res.json()
-      ),
-    { enabled: !!pokemonNumber } // Fetch only if pokemonNumber is set
+    ["pokemon", pokemonNumber], // Query key
+    async () => {
+      if (!pokemonNumber) throw new Error("No Pokémon number");
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNumber}`);
+      return response.json();
+    },
+    { enabled: !!pokemonNumber } // Configuration as second argument
   );
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
