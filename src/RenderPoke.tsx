@@ -52,9 +52,9 @@ function RenderPoke() {
             placeholderText="Click to select a date"
           />
         </label>
-        <button type="submit">Find my Pokemon</button>
+        <button type="submit">Find my Pokémon</button>
       </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p style={{ color: 'red' }}>Could not fetch Pokémon. Please try again.</p>}
       {isLoading ? (
         <div className="skeleton-container">
           <Skeleton className="skeleton" />
