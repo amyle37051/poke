@@ -10,6 +10,14 @@ function RenderPoke() {
     const [error, setError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
     const [pokemonNumber, setPokemonNumber] = useState<number | null>(null);
+    
+    const { data, isLoading, error } = useQuery(
+      ['pokemon', pokemonNumber], // Unique cache key
+      () =>
+        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNumber}`)
+          .then((res) => res.json()),
+      { enabled: !!pokemonNumber } // Fetch only if pokemonNumber is set
+    );
   
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
