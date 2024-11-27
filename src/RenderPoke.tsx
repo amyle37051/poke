@@ -17,19 +17,33 @@ function RenderPoke() {
   const [errorMessage, setError] = useState<string>(""); // Error messages for form validation
   const [pokemonNumber, setPokemonNumber] = useState<number | null>(null); // Pokémon number for API request
 
-  // Fetch Pokémon data using React Query
-  const { data, isLoading, error } = useQuery<PokemonData>(
-    ["pokemon", pokemonNumber], // Query key
-    async () => {
-      if (!pokemonNumber) throw new Error("No Pokémon number");
+  //could i use this instead
+  const { data, isLoading, error } = useQuery({  
+    queryKey: ["pokemon", pokemonNumber], //query key
+    queryFn: async () => {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNumber}`);
-      if (!response.ok) throw new Error("Failed to fetch Pokémon data");
-      return response.json(); // Ensure correct type
+      if (!response.ok) {
+        throw new Error("Failed to fetch Pokémon data");
+      }
+      return response.json(); // Ensure the response is returned as JSON
     },
-    {
-      enabled: !!pokemonNumber, // Fetch only if pokemonNumber is set
-    }
-  );
+    enabled: pokemonNumber !== null, // Fetch only if pokemonNumber is set
+  });
+
+
+  // Fetch Pokémon data using React Query
+  // const { data, isLoading, error } = useQuery<PokemonData>(
+  //   ["pokemon", pokemonNumber], // Query key
+  //   async () => {
+  //     if (!pokemonNumber) throw new Error("No Pokémon number");
+  //     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNumber}`);
+  //     if (!response.ok) throw new Error("Failed to fetch Pokémon data");
+  //     return response.json(); // Ensure correct type
+  //   },
+  //   {
+  //     enabled: !!pokemonNumber, // Fetch only if pokemonNumber is set
+  //   }
+  // );
 
   // Handle form submission to calculate Pokémon number
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
