@@ -4,13 +4,13 @@ import "react-datepicker/dist/react-datepicker.css"; // Styles for the date pick
 import { useQuery } from "@tanstack/react-query"; // React Query for data fetching
 import Skeleton from "./components/ui/Skeleton"; // Loading state component
 
-// Define the shape of Pokémon data from the API
-interface PokemonData {
-  name: string;
-  sprites: {
-    front_default: string;
-  };
-}
+// // Define the shape of Pokémon data from the API
+// interface PokemonData {
+//   name: string;
+//   sprites: {
+//     front_default: string;
+//   };
+// }
 
 function RenderPoke() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null); // Tracks the selected date
@@ -88,13 +88,13 @@ function RenderPoke() {
           <Skeleton className="skeleton" /> {/* Loading state */}
         </div>
       ) : error ? (
-        <p style={{ color: "red" }}>Could not fetch Pokémon. Please try again.</p> {/* API error */}
+        <p style={{ color: "red" }}>Could not fetch Pokémon. Please try again.</p> 
       ) : (
         data && (
           <div>
             <h2>You are: {data.name}</h2> {/* Pokémon name */}
             {data.sprites.front_default && (
-              <img src={data.sprites.front_default} alt={data.name} /> {/* Pokémon image */}
+              <img src={data.sprites.front_default} alt={data.name} /> 
             )}
           </div>
         )
