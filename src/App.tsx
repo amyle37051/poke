@@ -1,6 +1,7 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import RenderPoke from "./RenderPoke"; //move RenderPoke to its own file
+import genOne from "./GenOne";
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} /> {/* Home Page */}
           <Route path="/find-pokemon" element={<RenderPoke />} /> {/* Pokémon Finder */}
+          <Route path="/gen-one" element={<GenOne />} /> {/* 1st gen */}
         </Routes>
       </Router>
     </QueryClientProvider>
