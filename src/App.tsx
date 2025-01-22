@@ -11,7 +11,7 @@ const queryClient = new QueryClient();
 
 function HomePage() {
   return (
-    <div>
+    <div className="home-page">
       <h1>Welcome to Pokémon Finder</h1>
       <Link to="/find-pokemon">
         <button>Find My Pokémon</button>
@@ -22,6 +22,7 @@ function HomePage() {
     </div>
   );
 }
+
 
 function App() {
   return (

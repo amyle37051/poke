@@ -6,8 +6,19 @@ html {
 }
 
 #root {
-  display: block;
-  /* Remove flex centering to allow scrollable layouts */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  text-align: center; /* Center text */
+}
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .grid-container {
