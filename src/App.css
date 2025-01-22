@@ -1,104 +1,37 @@
-/* Ensure root element and body take up the entire viewport height */
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-family: Arial, sans-serif;
 }
 
 #root {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center;     /* Center vertically */
-  height: 100vh;           /* Full viewport height */
-  text-align: center;      /* Ensures text in the form is centered */
+  display: block;
+  /* Remove flex centering to allow scrollable layouts */
 }
 
-form {
-  display: flex;
-  flex-direction: column;  /* Stack inputs vertically */
-  align-items: center;     /* Center the form elements */
-  gap: 10px;               /* Space between input fields */
+.grid-container {
+  padding: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.grid-item {
+  text-align: center;
+}
+
+.grid-item img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
 }
 
 h1 {
-  margin-bottom: 20px;
-}
-
-form button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #646cffaa; /* Light purple background */
-  color: white;                /* White text */
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;          /* Rounded corners */
-}
-
-button:hover {
-  background-color: #4d47d6;   /* Darker shade on hover */
-}
-
-img {
-  margin-top: 20px;
-  width: 300px;
-  height: 300px;
-  object-fit: contain;          /* Ensure image is contained */
-}
-
-/* Style for react-datepicker */
-.react-datepicker__input-container input {
-  padding: 10px;
-  font-size: 16px;
+  margin: 20px 0;
   text-align: center;
-  border-radius: 5px;
-  border: 1px solid #646cff;
-}
-
-.react-datepicker__input-container input:focus {
-  outline: none;
-  border-color: #646cff;
-}
-
-.react-datepicker-wrapper {
-  width: 100%; /* Ensures DatePicker is responsive */
-}
-
-.react-datepicker {
-  font-size: 14px; /* Adjust font size */
-}
-
-/*skeleton Loading Placeholder */
-.skeleton {
-  width: 300px;
-  height: 300px;
-  background-color: #e0e0e0;
-  border-radius: 8px;         /*rounded corners */
-  animation: pulse 1.5s ease-in-out infinite;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.skeleton-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/*define pulsing animation for the skeleton */
-@keyframes pulse {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
 }
