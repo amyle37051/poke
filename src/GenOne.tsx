@@ -44,23 +44,21 @@ function GenOne() {
             {isLoading ? (
                 <p>Loading Pokémon...</p>
             ) : (
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "20px" }}>
+                <div className="grid">
                     {pokemonList.map((pokemon, index) => (
-                        <div key={pokemon.name} style={{ textAlign: "center" }}>
+                        <div className="grid-item" key={pokemon.name}>
                             <img
                                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`}
                                 alt={pokemon.name}
-                                style={{ width: "96px", height: "96px" }}
                             />
-                            <p style={{ textTransform: "capitalize" }}>
-                                #{index + 1} {pokemon.name}
-                            </p>
+                            <p>{`#${index + 1} ${pokemon.name}`}</p>
                         </div>
                     ))}
                 </div>
             )}
         </div>
     );
+
 }
 
 export default GenOne;
