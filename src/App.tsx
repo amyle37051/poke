@@ -16,6 +16,9 @@ function HomePage() {
       <Link to="/find-pokemon">
         <button>Find My Pokémon</button>
       </Link>
+      <Link to="/gen-one">
+      <button>Generation 1 Pokemons</button>
+      </Link>
     </div>
   );
 }
