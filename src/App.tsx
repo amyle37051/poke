@@ -1,7 +1,7 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import RenderPoke from "./RenderPoke"; //move RenderPoke to its own file
-import genOne from "./GenOne";
+import GenOne from "./GenOne";
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
@@ -17,7 +17,7 @@ function HomePage() {
         <button>Find My Pokémon</button>
       </Link>
       <Link to="/gen-one">
-      <button>Generation 1 Pokemons</button>
+        <button>Generation 1 Pokemons</button>
       </Link>
     </div>
   );

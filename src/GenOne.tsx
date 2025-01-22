@@ -5,7 +5,7 @@ function GenOne() {
     const { data, isLoading, error } = useQuery({
         queryKey: ["genOnePokemon"],
         queryFn: async () => {
-            const response = await fetch("https://pokeapi.co/api/v2/generation/1"),
+            const response = await fetch("https://pokeapi.co/api/v2/generation/1")
             if (!response.ok) {
                 throw new Error("Failed to fetch Pokemon data");
             }
